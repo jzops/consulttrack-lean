@@ -11,15 +11,6 @@ import {
   YAxis,
 } from "recharts";
 
-const pipelineData = [
-  { month: "Jan", value: 400 },
-  { month: "Feb", value: 300 },
-  { month: "Mar", value: 600 },
-  { month: "Apr", value: 800 },
-  { month: "May", value: 500 },
-  { month: "Jun", value: 700 },
-];
-
 const teamMembers = [
   {
     name: "Sarah Johnson",
@@ -79,27 +70,6 @@ export default function Index() {
             value="76%"
             description="Across all departments"
           />
-        </div>
-
-        {/* Pipeline Chart */}
-        <div className="bg-white/30 backdrop-blur-sm rounded-lg p-6 border border-white/20">
-          <h2 className="text-2xl font-semibold mb-4">Pipeline Trend</h2>
-          <div className="h-[300px]">
-            <ResponsiveContainer width="100%" height="100%">
-              <AreaChart data={pipelineData}>
-                <XAxis dataKey="month" />
-                <YAxis />
-                <Tooltip />
-                <Area
-                  type="monotone"
-                  dataKey="value"
-                  stroke="#1EAEDB"
-                  fill="#1EAEDB"
-                  fillOpacity={0.1}
-                />
-              </AreaChart>
-            </ResponsiveContainer>
-          </div>
         </div>
 
         {/* Team Section */}
