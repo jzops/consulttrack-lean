@@ -2,37 +2,79 @@
 import { useState } from "react";
 import { MetricsCard } from "@/components/dashboard/MetricsCard";
 import { TeamMemberCard } from "@/components/dashboard/TeamMemberCard";
-import {
-  Area,
-  AreaChart,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from "recharts";
+import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { Card } from "@/components/ui/card";
+import { UserPlus } from "lucide-react";
 
 const teamMembers = [
   {
-    name: "Sarah Johnson",
+    name: "David Thompson",
     role: "Solution Architect",
-    bio: "10+ years experience in scaling startups. Previously at Stripe and Airbnb.",
+    bio: "15+ years architecting scalable solutions. Previously led architecture at Datadog.",
+    calendarLink: "https://calendly.com/david",
+    imageUrl: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e",
+  },
+  {
+    name: "Elena Rodriguez",
+    role: "Sr. GTM Engineer",
+    bio: "Expert in RevOps and GTM tech stacks. Previously at HubSpot.",
+    calendarLink: "https://calendly.com/elena",
+    imageUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330",
+  },
+  {
+    name: "Alex Chen",
+    role: "GTM Engineer",
+    bio: "Specialist in marketing automation and sales enablement tools.",
+    calendarLink: "https://calendly.com/alex",
+    imageUrl: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7",
+  },
+  {
+    name: "Sarah Williams",
+    role: "Partner",
+    bio: "Former CRO, helping startups scale go-to-market operations.",
     calendarLink: "https://calendly.com/sarah",
-    imageUrl: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158",
+    imageUrl: "https://images.unsplash.com/photo-1580489944761-15a19d654956",
+  }
+];
+
+const otherTeams = [
+  "Core RevOps Team",
+  "Sales Ops Team",
+  "Marketing Ops Team",
+  "CS Ops Team",
+  "Partnerships Ops Team",
+  "GTM Ops Team"
+];
+
+const completedProjects = [
+  {
+    type: "Epic",
+    name: "GTM Tech Stack Implementation",
+    completedDate: "March 2024",
+    description: "Complete implementation of HubSpot, Salesforce, and Outreach.io",
+    milestones: [
+      "CRM Migration",
+      "Sales Enablement Tools Setup",
+      "Marketing Automation Integration"
+    ]
   },
   {
-    name: "Michael Chen",
-    role: "Senior Engineer",
-    bio: "Full-stack developer specialized in cloud architecture and DevOps.",
-    calendarLink: "https://calendly.com/michael",
-    imageUrl: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b",
+    type: "Epic",
+    name: "Revenue Operations Framework",
+    completedDate: "February 2024",
+    description: "Established core revenue operations processes and systems",
+    milestones: [
+      "Pipeline Management",
+      "Forecasting System",
+      "Analytics Dashboard"
+    ]
   },
   {
-    name: "Emma Davis",
-    role: "Product Partner",
-    bio: "Product strategy expert helping startups achieve product-market fit.",
-    calendarLink: "https://calendly.com/emma",
-    imageUrl: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7",
-  },
+    type: "Milestone",
+    name: "SOC2 Type 1 Certification",
+    completedDate: "January 2024",
+    description: "Achieved SOC2 Type 1 compliance certification",
+  }
 ];
 
 const controlCompletion = {
@@ -75,9 +117,58 @@ export default function Index() {
         {/* Team Section */}
         <section>
           <h2 className="text-2xl font-semibold mb-6">Our Team</h2>
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-4">
             {teamMembers.map((member) => (
               <TeamMemberCard key={member.name} {...member} />
+            ))}
+          </div>
+          
+          {/* Hire Other Teams */}
+          <div className="mt-8">
+            <h3 className="text-xl font-semibold mb-4">Hire Other Teams</h3>
+            <div className="grid gap-4 md:grid-cols-3">
+              {otherTeams.map((team) => (
+                <Card key={team} className="p-6 hover:bg-accent/5 transition-colors cursor-pointer">
+                  <div className="flex items-center space-x-4">
+                    <UserPlus className="w-6 h-6 text-accent" />
+                    <div>
+                      <h4 className="font-medium">{team}</h4>
+                      <p className="text-sm text-muted-foreground">Click to learn more</p>
+                    </div>
+                  </div>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Completed Projects Section */}
+        <section>
+          <h2 className="text-2xl font-semibold mb-6">Completed Projects</h2>
+          <div className="space-y-6">
+            {completedProjects.map((project, index) => (
+              <Card key={index} className="p-6">
+                <div className="flex items-start justify-between">
+                  <div>
+                    <span className="inline-block px-2 py-1 text-xs font-medium bg-accent/10 text-accent rounded mb-2">
+                      {project.type}
+                    </span>
+                    <h3 className="text-lg font-medium mb-2">{project.name}</h3>
+                    <p className="text-sm text-muted-foreground mb-4">{project.description}</p>
+                    {project.milestones && (
+                      <div className="space-y-2">
+                        {project.milestones.map((milestone, idx) => (
+                          <div key={idx} className="flex items-center text-sm">
+                            <div className="w-2 h-2 bg-accent rounded-full mr-2" />
+                            {milestone}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                  <span className="text-sm text-muted-foreground">{project.completedDate}</span>
+                </div>
+              </Card>
             ))}
           </div>
         </section>
