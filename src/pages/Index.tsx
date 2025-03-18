@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { MetricsCard } from "@/components/dashboard/MetricsCard";
 import { TeamMemberCard } from "@/components/dashboard/TeamMemberCard";
@@ -94,7 +93,7 @@ export default function Index() {
             className="h-4"
           />
           <img 
-            src="/logo.png" 
+            src="/placeholder.svg" 
             alt="Mistral AI Logo" 
             className="h-4"
           />
