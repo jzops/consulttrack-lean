@@ -19,6 +19,9 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        sans: ["Plus Jakarta Sans", "sans-serif"],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -26,20 +29,20 @@ export default {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "#403E43",
+          DEFAULT: "#331934",
           foreground: "#FFFFFF",
         },
         secondary: {
-          DEFAULT: "#9F9EA1",
-          foreground: "#FFFFFF",
+          DEFAULT: "#e9e9e7",
+          foreground: "#331934",
         },
         accent: {
-          DEFAULT: "#1EAEDB",
-          foreground: "#FFFFFF",
+          DEFAULT: "#dfaecf",
+          foreground: "#331934",
         },
         muted: {
-          DEFAULT: "#F6F6F7",
-          foreground: "#403E43",
+          DEFAULT: "#e5efc9",
+          foreground: "#331934",
         },
         destructive: {
           DEFAULT: "#ea384c",

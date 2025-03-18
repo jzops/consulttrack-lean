@@ -2,7 +2,6 @@
 import { useState } from "react";
 import { MetricsCard } from "@/components/dashboard/MetricsCard";
 import { TeamMemberCard } from "@/components/dashboard/TeamMemberCard";
-import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { Card } from "@/components/ui/card";
 import { UserPlus } from "lucide-react";
 
@@ -88,7 +87,13 @@ export default function Index() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-muted to-background p-8">
       <div className="max-w-7xl mx-auto space-y-8 animate-fade-in">
-        <h1 className="text-4xl font-bold tracking-tight">LeanScale Dashboard</h1>
+        <div className="flex items-center gap-4 mb-6">
+          <img 
+            src="/lovable-uploads/79532bf8-1e6b-4925-be95-5d51e27c470d.png" 
+            alt="LeanScale Logo" 
+            className="h-16"
+          />
+        </div>
         
         {/* Metrics Overview */}
         <div className="grid gap-4 md:grid-cols-4">
@@ -185,7 +190,7 @@ export default function Index() {
                 <h3 className="text-lg font-medium capitalize mb-2">
                   {department}
                 </h3>
-                <div className="relative w-full h-2 bg-muted rounded">
+                <div className="relative w-full h-2 bg-secondary rounded">
                   <div
                     className="absolute top-0 left-0 h-full bg-accent rounded"
                     style={{ width: `${completion}%` }}
