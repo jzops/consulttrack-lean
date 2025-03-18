@@ -87,11 +87,16 @@ export default function Index() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-muted to-background p-8">
       <div className="max-w-7xl mx-auto space-y-8 animate-fade-in">
-        <div className="flex items-center gap-4 mb-6">
+        <div className="flex items-center gap-6 mb-6">
           <img 
             src="/lovable-uploads/79532bf8-1e6b-4925-be95-5d51e27c470d.png" 
             alt="LeanScale Logo" 
-            className="h-16"
+            className="h-4"
+          />
+          <img 
+            src="/logo.png" 
+            alt="Mistral AI Logo" 
+            className="h-4"
           />
         </div>
         
