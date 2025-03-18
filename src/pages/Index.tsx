@@ -93,9 +93,9 @@ export default function Index() {
             className="h-4"
           />
           <img 
-            src="/placeholder.svg" 
+            src="/lovable-uploads/3db03203-c377-41e1-a0aa-dce49df7c27c.png" 
             alt="Mistral AI Logo" 
-            className="h-4"
+            className="h-8"
           />
         </div>
         
