@@ -98,23 +98,31 @@ export default function Index() {
         {/* Metrics Overview */}
         <div className="grid gap-4 md:grid-cols-4">
           <MetricsCard
-            title="Monthly Bookings"
+            title="Bookings to Goal"
             value="$124,000"
-            description="+20.1% from last month"
+            goal="$150,000"
+            progress={82}
+            description="82% of quarterly target"
           />
           <MetricsCard
-            title="Pipeline Value"
+            title="Pipeline to Goal"
             value="$1.2M"
-            description="42 active opportunities"
+            goal="$1.5M"
+            progress={80}
+            description="80% of required pipeline"
           />
           <MetricsCard
-            title="Team Cost Savings"
-            value="$760K"
-            description="vs. Internal Hiring"
+            title="Churn to Goal"
+            value="4.2%"
+            goal="<5%"
+            progress={90}
+            description="0.8% below target threshold"
           />
           <MetricsCard
             title="Control Completion"
             value="76%"
+            goal="100%"
+            progress={76}
             description="Across all departments"
           />
         </div>
