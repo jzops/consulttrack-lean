@@ -1,37 +1,40 @@
+
 import { useState } from "react";
 import { MetricsCard } from "@/components/dashboard/MetricsCard";
 import { TeamMemberCard } from "@/components/dashboard/TeamMemberCard";
+import { TeamMetrics } from "@/components/dashboard/TeamMetrics";
+import { MainNav } from "@/components/layout/MainNav";
 import { Card } from "@/components/ui/card";
 import { UserPlus } from "lucide-react";
 
 const teamMembers = [
   {
-    name: "David Thompson",
+    name: "Whitney Yvette",
     role: "Solution Architect",
     bio: "15+ years architecting scalable solutions. Previously led architecture at Datadog.",
-    calendarLink: "https://calendly.com/david",
-    imageUrl: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e",
+    calendarLink: "https://calendly.com/whitney",
+    imageUrl: "/lovable-uploads/668f6cf8-d746-4bc0-8de9-24a39b33fbe4.png",
   },
   {
-    name: "Elena Rodriguez",
+    name: "Christopher Mardian",
     role: "Sr. GTM Engineer",
     bio: "Expert in RevOps and GTM tech stacks. Previously at HubSpot.",
-    calendarLink: "https://calendly.com/elena",
-    imageUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330",
+    calendarLink: "https://calendly.com/christopher",
+    imageUrl: "/lovable-uploads/3db6ee0b-bf34-4a76-9860-36bfe70aad62.png",
   },
   {
-    name: "Alex Chen",
+    name: "Izzy Navin",
     role: "GTM Engineer",
     bio: "Specialist in marketing automation and sales enablement tools.",
-    calendarLink: "https://calendly.com/alex",
-    imageUrl: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7",
+    calendarLink: "https://calendly.com/izzy",
+    imageUrl: "/lovable-uploads/ac3649b7-b722-4042-86c6-4855958c197f.png",
   },
   {
-    name: "Sarah Williams",
+    name: "Cameron Legge",
     role: "Partner",
     bio: "Former CRO, helping startups scale go-to-market operations.",
-    calendarLink: "https://calendly.com/sarah",
-    imageUrl: "https://images.unsplash.com/photo-1580489944761-15a19d654956",
+    calendarLink: "https://calendly.com/cameron",
+    imageUrl: "/lovable-uploads/079cde83-3408-4b24-8f28-1d9309adb81a.png",
   }
 ];
 
@@ -86,17 +89,15 @@ export default function Index() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-muted to-background p-8">
       <div className="max-w-7xl mx-auto space-y-8 animate-fade-in">
-        <div className="flex items-center gap-6 mb-6">
-          <img 
-            src="/lovable-uploads/79532bf8-1e6b-4925-be95-5d51e27c470d.png" 
-            alt="LeanScale Logo" 
-            className="h-4"
-          />
-          <img 
-            src="/lovable-uploads/3db03203-c377-41e1-a0aa-dce49df7c27c.png" 
-            alt="Mistral AI Logo" 
-            className="h-8"
-          />
+        <div className="flex justify-between items-center mb-6">
+          <div className="flex items-center gap-2">
+            <MainNav />
+            <img 
+              src="/lovable-uploads/79532bf8-1e6b-4925-be95-5d51e27c470d.png" 
+              alt="LeanScale Logo" 
+              className="h-4"
+            />
+          </div>
         </div>
         
         {/* Metrics Overview */}
@@ -133,7 +134,11 @@ export default function Index() {
 
         {/* Team Section */}
         <section>
-          <h2 className="text-2xl font-semibold mb-6">Our Team</h2>
+          <h2 className="text-2xl font-semibold mb-6">Your Team</h2>
+          
+          {/* Team Metrics */}
+          <TeamMetrics />
+          
           <div className="grid gap-6 md:grid-cols-4">
             {teamMembers.map((member) => (
               <TeamMemberCard key={member.name} {...member} />
