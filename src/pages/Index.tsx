@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { MetricsCard } from "@/components/dashboard/MetricsCard";
 import { TeamMemberCard } from "@/components/dashboard/TeamMemberCard";
@@ -20,7 +19,7 @@ const teamMembers = [
     role: "Sr. GTM Engineer",
     bio: "Expert in RevOps and GTM tech stacks. Previously at HubSpot.",
     calendarLink: "https://calendly.com/christopher",
-    imageUrl: "/lovable-uploads/3db6ee0b-bf34-4a76-9860-36bfe70aad62.png",
+    imageUrl: "/lovable-uploads/079cde83-3408-4b24-8f28-1d9309adb81a.png",
   },
   {
     name: "Izzy Navin",
@@ -34,17 +33,13 @@ const teamMembers = [
     role: "Partner",
     bio: "Former CRO, helping startups scale go-to-market operations.",
     calendarLink: "https://calendly.com/cameron",
-    imageUrl: "/lovable-uploads/079cde83-3408-4b24-8f28-1d9309adb81a.png",
+    imageUrl: "/lovable-uploads/3db6ee0b-bf34-4a76-9860-36bfe70aad62.png",
   }
 ];
 
 const otherTeams = [
-  "Core RevOps Team",
-  "Sales Ops Team",
-  "Marketing Ops Team",
-  "CS Ops Team",
-  "Partnerships Ops Team",
-  "GTM Ops Team"
+  "Revenue Operations",
+  "Pipeline Operations"
 ];
 
 const completedProjects = [
@@ -81,8 +76,8 @@ const completedProjects = [
 const controlCompletion = {
   marketing: 76,
   sales: 50,
-  operations: 85,
-  engineering: 92,
+  "customer success": 85,
+  partnerships: 92,
 };
 
 export default function Index() {
