@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { MetricsCard } from "@/components/dashboard/MetricsCard";
 import { TeamMemberCard } from "@/components/dashboard/TeamMemberCard";
@@ -45,31 +46,36 @@ const otherTeams = [
 const completedProjects = [
   {
     type: "Epic",
-    name: "GTM Tech Stack Implementation",
+    name: "Lead Attribution Taxonomy v2",
     completedDate: "March 2024",
-    description: "Complete implementation of HubSpot, Salesforce, and Outreach.io",
+    description: "Improved lead tracking and attribution for better marketing ROI analysis",
     milestones: [
-      "CRM Migration",
-      "Sales Enablement Tools Setup",
-      "Marketing Automation Integration"
+      "Multi-touch Attribution Model",
+      "Campaign Source Tracking Implementation",
+      "Reporting Dashboard Integration"
     ]
   },
   {
     type: "Epic",
-    name: "Revenue Operations Framework",
+    name: "Hubspot to Salesforce Migration",
     completedDate: "February 2024",
-    description: "Established core revenue operations processes and systems",
+    description: "Successfully migrated from Hubspot to Salesforce with zero data loss",
     milestones: [
-      "Pipeline Management",
-      "Forecasting System",
-      "Analytics Dashboard"
+      "Data Mapping & Cleansing",
+      "Custom Field Configuration",
+      "User Training & Adoption"
     ]
   },
   {
-    type: "Milestone",
-    name: "SOC2 Type 1 Certification",
+    type: "Epic",
+    name: "Reduce Speed to Lead from 72h to 30min",
     completedDate: "January 2024",
-    description: "Achieved SOC2 Type 1 compliance certification",
+    description: "Dramatically reduced lead response time to improve conversion rates",
+    milestones: [
+      "Lead Routing Automation",
+      "Real-time Notifications",
+      "SLA Monitoring Dashboard"
+    ]
   }
 ];
 
@@ -159,9 +165,9 @@ export default function Index() {
           </div>
         </section>
 
-        {/* Completed Projects Section */}
+        {/* Completed Epics Section */}
         <section>
-          <h2 className="text-2xl font-semibold mb-6">Completed Projects</h2>
+          <h2 className="text-2xl font-semibold mb-6">Completed Epics</h2>
           <div className="space-y-6">
             {completedProjects.map((project, index) => (
               <Card key={index} className="p-6">
