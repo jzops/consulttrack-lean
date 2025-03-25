@@ -1,6 +1,7 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Calendar } from "lucide-react";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 interface TeamMemberCardProps {
   name: string;
@@ -11,14 +12,20 @@ interface TeamMemberCardProps {
 }
 
 export function TeamMemberCard({ name, role, bio, calendarLink, imageUrl }: TeamMemberCardProps) {
+  // Extract initials for the avatar fallback
+  const initials = name
+    .split(' ')
+    .map(n => n[0])
+    .join('');
+
   return (
     <Card className="overflow-hidden transition-transform hover:scale-[1.02] animate-fade-in border-accent/20">
       <CardHeader className="p-0">
-        <div className="relative h-48 w-full">
+        <div className="relative h-48 w-full bg-muted/50">
           <img
             src={imageUrl}
             alt={name}
-            className="object-cover w-full h-full"
+            className="object-cover w-full h-full object-center"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent" />
         </div>
