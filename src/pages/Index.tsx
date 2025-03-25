@@ -148,7 +148,7 @@ export default function Index() {
           {/* Bring in Other Teams */}
           <div className="mt-8">
             <h3 className="text-xl font-semibold mb-4">Bring in Other Teams</h3>
-            <div className="grid gap-4 md:grid-cols-3">
+            <div className="grid gap-4 md:grid-cols-2">
               {otherTeams.map((team) => (
                 <Card key={team} className="p-6 hover:bg-accent/5 transition-colors cursor-pointer">
                   <div className="flex items-center space-x-4">
