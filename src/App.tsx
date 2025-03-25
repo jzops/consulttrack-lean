@@ -11,6 +11,7 @@ import Projects from "./pages/Projects";
 import Controls from "./pages/Controls";
 import Systems from "./pages/Systems";
 import AIAgents from "./pages/AIAgents";
+import Resources from "./pages/Resources";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -29,6 +30,7 @@ const App = () => (
           <Route path="/controls" element={<Controls />} />
           <Route path="/systems" element={<Systems />} />
           <Route path="/ai-agents" element={<AIAgents />} />
+          <Route path="/resources" element={<Resources />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

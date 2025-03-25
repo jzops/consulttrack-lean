@@ -21,7 +21,7 @@ export function TeamMemberCard({ name, role, bio, calendarLink, imageUrl }: Team
   return (
     <Card className="overflow-hidden transition-transform hover:scale-[1.02] animate-fade-in border-accent/20">
       <CardHeader className="p-0">
-        <div className="relative h-48 w-full bg-muted/50">
+        <div className="relative h-64 w-full bg-muted/50">
           <img
             src={imageUrl}
             alt={name}

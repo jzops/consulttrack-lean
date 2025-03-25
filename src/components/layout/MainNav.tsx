@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { Menu, LayoutDashboard, Goal, Users, Projector, Settings, Server, Bot } from "lucide-react";
+import { Menu, LayoutDashboard, Goal, Users, Projector, Settings, Server, Bot, BookOpen } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 export function MainNav() {
@@ -16,7 +16,8 @@ export function MainNav() {
     { name: "Projects", icon: Projector, path: "/projects" },
     { name: "Controls", icon: Settings, path: "/controls" },
     { name: "Systems", icon: Server, path: "/systems" },
-    { name: "AI Agents", icon: Bot, path: "/ai-agents" }
+    { name: "AI Agents", icon: Bot, path: "/ai-agents" },
+    { name: "Resources", icon: BookOpen, path: "/resources" }
   ];
 
   const handleNavigation = (path: string) => {
@@ -35,11 +36,18 @@ export function MainNav() {
       <SheetContent side="left" className="w-64 p-0">
         <div className="flex flex-col h-full">
           <div className="p-4 border-b">
-            <img 
-              src="/lovable-uploads/79532bf8-1e6b-4925-be95-5d51e27c470d.png" 
-              alt="LeanScale Logo" 
-              className="h-6 mb-2"
-            />
+            <div className="flex items-center justify-between">
+              <img 
+                src="/lovable-uploads/79532bf8-1e6b-4925-be95-5d51e27c470d.png" 
+                alt="LeanScale Logo" 
+                className="h-6"
+              />
+              <img 
+                src="https://mistral.ai/images/logo-dark.svg" 
+                alt="Mistral AI Logo" 
+                className="h-6"
+              />
+            </div>
           </div>
           <nav className="flex-1 py-4">
             <ul className="space-y-1 px-2">
