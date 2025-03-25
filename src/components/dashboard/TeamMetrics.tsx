@@ -10,7 +10,7 @@ export function TeamMetrics() {
           <Clock className="h-5 w-5 text-accent" />
         </div>
         <div>
-          <p className="text-sm text-muted-foreground">Total Hours</p>
+          <p className="text-sm text-muted-foreground">Total Hours remaining this month</p>
           <h3 className="text-xl font-semibold">100</h3>
         </div>
       </Card>

@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { MetricsCard } from "@/components/dashboard/MetricsCard";
 import { TeamMemberCard } from "@/components/dashboard/TeamMemberCard";
@@ -146,9 +145,9 @@ export default function Index() {
             ))}
           </div>
           
-          {/* Hire Other Teams */}
+          {/* Bring in Other Teams */}
           <div className="mt-8">
-            <h3 className="text-xl font-semibold mb-4">Hire Other Teams</h3>
+            <h3 className="text-xl font-semibold mb-4">Bring in Other Teams</h3>
             <div className="grid gap-4 md:grid-cols-3">
               {otherTeams.map((team) => (
                 <Card key={team} className="p-6 hover:bg-accent/5 transition-colors cursor-pointer">
