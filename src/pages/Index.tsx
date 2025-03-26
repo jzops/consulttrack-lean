@@ -1,10 +1,32 @@
+
 import { useState } from "react";
 import { MetricsCard } from "@/components/dashboard/MetricsCard";
 import { TeamMemberCard } from "@/components/dashboard/TeamMemberCard";
 import { TeamMetrics } from "@/components/dashboard/TeamMetrics";
 import { MainNav } from "@/components/layout/MainNav";
 import { Card } from "@/components/ui/card";
-import { UserPlus } from "lucide-react";
+import { UserPlus, Info, Calendar, CheckCheck, AlertTriangle, ArrowDown, ArrowUp } from "lucide-react";
+import { 
+  Dialog, 
+  DialogContent, 
+  DialogDescription, 
+  DialogHeader, 
+  DialogTitle,
+  DialogTrigger,
+  DialogFooter
+} from "@/components/ui/dialog";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card";
+import { Button } from "@/components/ui/button";
+import { useToast } from "@/hooks/use-toast";
 
 const teamMembers = [
   {
@@ -86,6 +108,24 @@ const controlCompletion = {
 };
 
 export default function Index() {
+  const { toast } = useToast();
+  
+  const [showTeamPopup, setShowTeamPopup] = useState(false);
+  const [selectedTeam, setSelectedTeam] = useState('');
+
+  const handleTeamClick = (team: string) => {
+    setSelectedTeam(team);
+    setShowTeamPopup(true);
+  };
+
+  const handleBringInTeam = () => {
+    toast({
+      title: "Team Added",
+      description: `${selectedTeam} team has been added to your workspace`,
+    });
+    setShowTeamPopup(false);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-muted to-background p-8">
       <div className="max-w-7xl mx-auto space-y-8 animate-fade-in">
@@ -102,34 +142,196 @@ export default function Index() {
         
         {/* Metrics Overview */}
         <div className="grid gap-4 md:grid-cols-4">
-          <MetricsCard
-            title="Bookings to Goal"
-            value="$124,000"
-            goal="$150,000"
-            progress={82}
-            description="82% of quarterly target"
-          />
-          <MetricsCard
-            title="Pipeline to Goal"
-            value="$1.2M"
-            goal="$1.5M"
-            progress={80}
-            description="80% of required pipeline"
-          />
-          <MetricsCard
-            title="Churn to Goal"
-            value="4.2%"
-            goal="<5%"
-            progress={90}
-            description="0.8% below target threshold"
-          />
-          <MetricsCard
-            title="Control Completion"
-            value="76%"
-            goal="100%"
-            progress={76}
-            description="Across all departments"
-          />
+          <Popover>
+            <PopoverTrigger asChild>
+              <div className="cursor-pointer">
+                <MetricsCard
+                  title="Bookings to Goal"
+                  value="$124,000"
+                  goal="$150,000"
+                  progress={82}
+                  description="82% of quarterly target"
+                />
+              </div>
+            </PopoverTrigger>
+            <PopoverContent className="w-80">
+              <div className="space-y-4">
+                <h3 className="font-medium">Bookings Breakdown</h3>
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between text-sm">
+                    <span>New business:</span>
+                    <span className="font-medium">$75,000</span>
+                  </div>
+                  <div className="flex items-center justify-between text-sm">
+                    <span>Expansion:</span>
+                    <span className="font-medium">$42,000</span>
+                  </div>
+                  <div className="flex items-center justify-between text-sm">
+                    <span>Renewal:</span>
+                    <span className="font-medium">$7,000</span>
+                  </div>
+                  <div className="h-px bg-border my-2" />
+                  <div className="flex items-center justify-between">
+                    <span>Total:</span>
+                    <span className="font-medium">$124,000</span>
+                  </div>
+                </div>
+                <div className="flex items-center text-xs text-muted-foreground mt-2">
+                  <span className="flex items-center text-emerald-500 mr-4">
+                    <ArrowUp className="h-3 w-3 mr-1" />
+                    12% vs last quarter
+                  </span>
+                  <span className="flex items-center text-red-500">
+                    <ArrowDown className="h-3 w-3 mr-1" />
+                    5% vs forecasted
+                  </span>
+                </div>
+              </div>
+            </PopoverContent>
+          </Popover>
+
+          <Popover>
+            <PopoverTrigger asChild>
+              <div className="cursor-pointer">
+                <MetricsCard
+                  title="Pipeline to Goal"
+                  value="$1.2M"
+                  goal="$1.5M"
+                  progress={80}
+                  description="80% of required pipeline"
+                />
+              </div>
+            </PopoverTrigger>
+            <PopoverContent className="w-80">
+              <div className="space-y-4">
+                <h3 className="font-medium">Pipeline Health</h3>
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between text-sm">
+                    <span>Early stage:</span>
+                    <span className="font-medium">$500,000</span>
+                  </div>
+                  <div className="flex items-center justify-between text-sm">
+                    <span>Mid stage:</span>
+                    <span className="font-medium">$450,000</span>
+                  </div>
+                  <div className="flex items-center justify-between text-sm">
+                    <span>Late stage:</span>
+                    <span className="font-medium">$250,000</span>
+                  </div>
+                  <div className="h-px bg-border my-2" />
+                  <div className="flex items-center justify-between">
+                    <span>Total Pipeline:</span>
+                    <span className="font-medium">$1,200,000</span>
+                  </div>
+                </div>
+                <div className="flex items-center bg-amber-50 p-2 rounded text-xs text-amber-800 mt-2">
+                  <AlertTriangle className="h-3 w-3 mr-2" />
+                  <span>Need $300K more pipeline to meet forecast</span>
+                </div>
+              </div>
+            </PopoverContent>
+          </Popover>
+
+          <Popover>
+            <PopoverTrigger asChild>
+              <div className="cursor-pointer">
+                <MetricsCard
+                  title="Churn to Goal"
+                  value="4.2%"
+                  goal="<5%"
+                  progress={90}
+                  description="0.8% below target threshold"
+                />
+              </div>
+            </PopoverTrigger>
+            <PopoverContent className="w-80">
+              <div className="space-y-4">
+                <h3 className="font-medium">Churn Analysis</h3>
+                <div className="space-y-3">
+                  <div className="text-sm">
+                    <div className="flex justify-between mb-1">
+                      <span>Product issues:</span>
+                      <span>35%</span>
+                    </div>
+                    <div className="w-full h-2 bg-muted rounded-full overflow-hidden">
+                      <div className="bg-red-400 h-full" style={{ width: "35%" }} />
+                    </div>
+                  </div>
+                  <div className="text-sm">
+                    <div className="flex justify-between mb-1">
+                      <span>Pricing concerns:</span>
+                      <span>28%</span>
+                    </div>
+                    <div className="w-full h-2 bg-muted rounded-full overflow-hidden">
+                      <div className="bg-orange-400 h-full" style={{ width: "28%" }} />
+                    </div>
+                  </div>
+                  <div className="text-sm">
+                    <div className="flex justify-between mb-1">
+                      <span>Competitor switch:</span>
+                      <span>22%</span>
+                    </div>
+                    <div className="w-full h-2 bg-muted rounded-full overflow-hidden">
+                      <div className="bg-yellow-400 h-full" style={{ width: "22%" }} />
+                    </div>
+                  </div>
+                  <div className="text-sm">
+                    <div className="flex justify-between mb-1">
+                      <span>Other reasons:</span>
+                      <span>15%</span>
+                    </div>
+                    <div className="w-full h-2 bg-muted rounded-full overflow-hidden">
+                      <div className="bg-blue-400 h-full" style={{ width: "15%" }} />
+                    </div>
+                  </div>
+                </div>
+                <div className="flex items-center bg-emerald-50 p-2 rounded text-xs text-emerald-800 mt-2">
+                  <CheckCheck className="h-3 w-3 mr-2" />
+                  <span>Churn rate trending down 0.3% month-over-month</span>
+                </div>
+              </div>
+            </PopoverContent>
+          </Popover>
+
+          <HoverCard>
+            <HoverCardTrigger asChild>
+              <div className="cursor-pointer">
+                <MetricsCard
+                  title="Control Completion"
+                  value="76%"
+                  goal="100%"
+                  progress={76}
+                  description="Across all departments"
+                />
+              </div>
+            </HoverCardTrigger>
+            <HoverCardContent className="w-80">
+              <div className="space-y-2">
+                <h3 className="font-medium text-sm">Department Breakdown</h3>
+                <ul className="space-y-1.5 text-sm">
+                  <li className="flex items-center justify-between">
+                    <span>Marketing:</span>
+                    <span className="font-medium">{controlCompletion.marketing}%</span>
+                  </li>
+                  <li className="flex items-center justify-between">
+                    <span>Sales:</span>
+                    <span className="font-medium">{controlCompletion.sales}%</span>
+                  </li>
+                  <li className="flex items-center justify-between">
+                    <span>Customer Success:</span>
+                    <span className="font-medium">{controlCompletion["customer success"]}%</span>
+                  </li>
+                  <li className="flex items-center justify-between">
+                    <span>Partnerships:</span>
+                    <span className="font-medium">{controlCompletion.partnerships}%</span>
+                  </li>
+                </ul>
+                <div className="text-xs text-muted-foreground mt-2">
+                  Hover over each department in the Control Completion section for more details.
+                </div>
+              </div>
+            </HoverCardContent>
+          </HoverCard>
         </div>
 
         {/* Team Section */}
@@ -150,7 +352,11 @@ export default function Index() {
             <h3 className="text-xl font-semibold mb-4">Bring in Other Teams</h3>
             <div className="grid gap-4 md:grid-cols-2">
               {otherTeams.map((team) => (
-                <Card key={team} className="p-6 hover:bg-accent/5 transition-colors cursor-pointer">
+                <Card 
+                  key={team} 
+                  className="p-6 hover:bg-accent/5 transition-colors cursor-pointer"
+                  onClick={() => handleTeamClick(team)}
+                >
                   <div className="flex items-center space-x-4">
                     <UserPlus className="w-6 h-6 text-accent" />
                     <div>
@@ -169,28 +375,83 @@ export default function Index() {
           <h2 className="text-2xl font-semibold mb-6">Completed Epics</h2>
           <div className="space-y-6">
             {completedProjects.map((project, index) => (
-              <Card key={index} className="p-6">
-                <div className="flex items-start justify-between">
-                  <div>
-                    <span className="inline-block px-2 py-1 text-xs font-medium bg-accent/10 text-accent rounded mb-2">
-                      {project.type}
-                    </span>
-                    <h3 className="text-lg font-medium mb-2">{project.name}</h3>
-                    <p className="text-sm text-muted-foreground mb-4">{project.description}</p>
-                    {project.milestones && (
-                      <div className="space-y-2">
-                        {project.milestones.map((milestone, idx) => (
-                          <div key={idx} className="flex items-center text-sm">
-                            <div className="w-2 h-2 bg-accent rounded-full mr-2" />
-                            {milestone}
+              <Dialog key={index}>
+                <DialogTrigger asChild>
+                  <Card className="p-6 cursor-pointer hover:shadow-md transition-shadow">
+                    <div className="flex items-start justify-between">
+                      <div>
+                        <span className="inline-block px-2 py-1 text-xs font-medium bg-accent/10 text-accent rounded mb-2">
+                          {project.type}
+                        </span>
+                        <h3 className="text-lg font-medium mb-2">{project.name}</h3>
+                        <p className="text-sm text-muted-foreground mb-4">{project.description}</p>
+                        {project.milestones && (
+                          <div className="space-y-2">
+                            {project.milestones.map((milestone, idx) => (
+                              <div key={idx} className="flex items-center text-sm">
+                                <div className="w-2 h-2 bg-accent rounded-full mr-2" />
+                                {milestone}
+                              </div>
+                            ))}
                           </div>
-                        ))}
+                        )}
                       </div>
-                    )}
+                      <span className="text-sm text-muted-foreground">{project.completedDate}</span>
+                    </div>
+                  </Card>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-md">
+                  <DialogHeader>
+                    <DialogTitle className="text-xl">{project.name}</DialogTitle>
+                    <DialogDescription>
+                      <div className="flex items-center gap-2 mt-2">
+                        <span className="inline-block px-2 py-1 text-xs font-medium bg-accent/10 text-accent rounded">
+                          {project.type}
+                        </span>
+                        <span className="text-sm">{project.completedDate}</span>
+                      </div>
+                    </DialogDescription>
+                  </DialogHeader>
+                  
+                  <div className="py-4">
+                    <div className="text-sm mb-6">{project.description}</div>
+                    
+                    <h4 className="text-sm font-medium mb-3">Key Milestones</h4>
+                    <ul className="space-y-3 mb-6">
+                      {project.milestones.map((milestone, idx) => (
+                        <li key={idx} className="flex items-start">
+                          <div className="w-5 h-5 bg-accent/20 rounded-full flex items-center justify-center mr-2 mt-0.5">
+                            <CheckCheck className="w-3 h-3 text-accent" />
+                          </div>
+                          <div>
+                            <p className="font-medium text-sm">{milestone}</p>
+                            <p className="text-xs text-muted-foreground">
+                              {["Completed on time", "Delivered ahead of schedule", "Completed with team effort"][idx % 3]}
+                            </p>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                    
+                    <div className="bg-muted/30 p-3 rounded-md text-sm">
+                      <h5 className="font-medium text-sm mb-2">Impact:</h5>
+                      <p>
+                        {index === 0 && "Improved marketing attribution resulted in 24% more efficient ad spend and better ROI tracking."}
+                        {index === 1 && "Migrating to Salesforce increased sales team productivity by 32% and improved forecasting accuracy."}
+                        {index === 2 && "Faster lead response times increased conversion rates by 15% and improved customer satisfaction scores."}
+                      </p>
+                    </div>
                   </div>
-                  <span className="text-sm text-muted-foreground">{project.completedDate}</span>
-                </div>
-              </Card>
+                  
+                  <DialogFooter>
+                    <Button variant="outline">
+                      <Calendar className="mr-2 h-4 w-4" />
+                      View Timeline
+                    </Button>
+                    <Button>See Related Projects</Button>
+                  </DialogFooter>
+                </DialogContent>
+              </Dialog>
             ))}
           </div>
         </section>
@@ -200,27 +461,138 @@ export default function Index() {
           <h2 className="text-2xl font-semibold mb-6">Control Completion</h2>
           <div className="grid gap-4 md:grid-cols-2">
             {Object.entries(controlCompletion).map(([department, completion]) => (
-              <div
-                key={department}
-                className="bg-white/30 backdrop-blur-sm rounded-lg p-6 border border-white/20"
-              >
-                <h3 className="text-lg font-medium capitalize mb-2">
-                  {department}
-                </h3>
-                <div className="relative w-full h-2 bg-secondary rounded">
+              <Popover key={department}>
+                <PopoverTrigger asChild>
                   <div
-                    className="absolute top-0 left-0 h-full bg-accent rounded"
-                    style={{ width: `${completion}%` }}
-                  />
-                </div>
-                <p className="text-sm text-muted-foreground mt-2">
-                  {completion}% complete
-                </p>
-              </div>
+                    className="bg-white/30 backdrop-blur-sm rounded-lg p-6 border border-white/20 cursor-pointer hover:shadow-md transition-shadow"
+                  >
+                    <h3 className="text-lg font-medium capitalize mb-2">
+                      {department}
+                    </h3>
+                    <div className="relative w-full h-2 bg-secondary rounded">
+                      <div
+                        className="absolute top-0 left-0 h-full bg-accent rounded"
+                        style={{ width: `${completion}%` }}
+                      />
+                    </div>
+                    <p className="text-sm text-muted-foreground mt-2">
+                      {completion}% complete
+                    </p>
+                  </div>
+                </PopoverTrigger>
+                <PopoverContent className="w-80">
+                  <div className="space-y-4">
+                    <h3 className="font-medium capitalize">
+                      {department} Control Details
+                    </h3>
+                    
+                    <div className="space-y-2">
+                      <div className="text-sm flex items-center justify-between">
+                        <span>Critical controls:</span>
+                        <span className="font-medium">
+                          {Math.round(completion * 0.6)}% of {Math.round(completion * 0.6 / (completion * 0.01))}
+                        </span>
+                      </div>
+                      <div className="text-sm flex items-center justify-between">
+                        <span>High-priority controls:</span>
+                        <span className="font-medium">
+                          {Math.round(completion * 0.3)}% of {Math.round(completion * 0.3 / (completion * 0.01))}
+                        </span>
+                      </div>
+                      <div className="text-sm flex items-center justify-between">
+                        <span>Medium-priority controls:</span>
+                        <span className="font-medium">
+                          {Math.round(completion * 0.1)}% of {Math.round(completion * 0.1 / (completion * 0.01))}
+                        </span>
+                      </div>
+                    </div>
+                    
+                    <div className={`rounded p-2 text-xs ${
+                      completion >= 85 ? "bg-green-50 text-green-800" : 
+                      completion >= 70 ? "bg-yellow-50 text-yellow-800" : 
+                      "bg-red-50 text-red-800"
+                    }`}>
+                      {completion >= 85 ? (
+                        <span className="flex items-center"><CheckCheck className="w-3 h-3 mr-1" /> On track to complete all controls</span>
+                      ) : completion >= 70 ? (
+                        <span className="flex items-center"><Info className="w-3 h-3 mr-1" /> Making good progress, but needs attention</span>
+                      ) : (
+                        <span className="flex items-center"><AlertTriangle className="w-3 h-3 mr-1" /> Needs immediate attention</span>
+                      )}
+                    </div>
+                    
+                    <Button size="sm" className="w-full">View All Controls</Button>
+                  </div>
+                </PopoverContent>
+              </Popover>
             ))}
           </div>
         </section>
       </div>
+
+      {/* Team Selection Dialog */}
+      <Dialog open={showTeamPopup} onOpenChange={setShowTeamPopup}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Add {selectedTeam} Team</DialogTitle>
+            <DialogDescription>
+              Bringing this team into your workspace will give you access to their expertise and resources.
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="py-4">
+            <h4 className="text-sm font-medium mb-2">Team Expertise</h4>
+            <div className="space-y-2 mb-4">
+              {selectedTeam === "Revenue Operations" ? (
+                <>
+                  <p className="text-sm">The Revenue Operations team specializes in:</p>
+                  <ul className="list-disc pl-5 space-y-1 text-sm">
+                    <li>Sales and marketing alignment</li>
+                    <li>Pipeline optimization</li>
+                    <li>Revenue forecasting</li>
+                    <li>GTM strategy implementation</li>
+                    <li>Sales enablement</li>
+                  </ul>
+                </>
+              ) : (
+                <>
+                  <p className="text-sm">The Pipeline Operations team specializes in:</p>
+                  <ul className="list-disc pl-5 space-y-1 text-sm">
+                    <li>Lead qualification and scoring</li>
+                    <li>Opportunity management</li>
+                    <li>Sales process optimization</li>
+                    <li>Conversion rate improvements</li>
+                    <li>Pipeline analytics</li>
+                  </ul>
+                </>
+              )}
+            </div>
+            
+            <div className="bg-muted/30 p-3 rounded-md text-sm mb-4">
+              <h5 className="font-medium text-sm mb-2">Recent Team Achievements:</h5>
+              {selectedTeam === "Revenue Operations" ? (
+                <p>Implemented new attribution model that increased marketing ROI by 28% in the last quarter.</p>
+              ) : (
+                <p>Reduced sales cycle length by 35% through process optimization and automated qualification.</p>
+              )}
+            </div>
+            
+            <div className="text-sm">
+              <span className="font-medium">Team Size:</span> {selectedTeam === "Revenue Operations" ? "7 members" : "5 members"}
+            </div>
+          </div>
+          
+          <DialogFooter className="sm:justify-between">
+            <Button variant="outline" onClick={() => setShowTeamPopup(false)}>
+              Cancel
+            </Button>
+            <Button onClick={handleBringInTeam}>
+              <UserPlus className="mr-2 h-4 w-4" />
+              Add {selectedTeam} Team
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

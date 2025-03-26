@@ -36,16 +36,11 @@ export function MainNav() {
       <SheetContent side="left" className="w-64 p-0">
         <div className="flex flex-col h-full">
           <div className="p-4 border-b">
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-center">
               <img 
                 src="/lovable-uploads/79532bf8-1e6b-4925-be95-5d51e27c470d.png" 
                 alt="LeanScale Logo" 
-                className="h-6"
-              />
-              <img 
-                src="https://mistral.ai/images/logo-dark.svg" 
-                alt="Mistral AI Logo" 
-                className="h-6"
+                className="h-8"
               />
             </div>
           </div>
