@@ -358,7 +358,7 @@ export function BookingsMetrics() {
                       outerRadius={100}
                       fill="#8884d8"
                       dataKey="value"
-                      label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
+                      label={({ name, percent }) => `${name}: ${(Number(percent) * 100).toFixed(0)}%`}
                     >
                       {salesCycleData.map((entry, index) => (
                         <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
