@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { 
@@ -21,11 +22,13 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { CalendarDateRangePicker } from "@/components/ui/calendar"
 import { CalendarIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
+import { DateRangePicker } from "@/components/ui/date-range-picker";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
+import { DateRange } from "react-day-picker";
 
 interface BookingsMetricsProps {
   className?: string;
@@ -112,8 +115,13 @@ export function BookingsMetrics({ className }: BookingsMetricsProps) {
                   <CalendarIcon className="ml-2 h-4 w-4 opacity-50" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56 p-0" align="end" forceMount>
-                <CalendarDateRangePicker date={date} onDateChange={setDate} />
+              <DropdownMenuContent className="w-auto p-0" align="end">
+                <Calendar
+                  mode="single"
+                  selected={date}
+                  onSelect={setDate}
+                  className="p-3 pointer-events-auto"
+                />
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
@@ -134,17 +142,7 @@ export function BookingsMetrics({ className }: BookingsMetricsProps) {
         <CardContent>
           <div className="flex items-center justify-between">
             <h3 className="text-lg font-semibold">Pipeline by Quarter</h3>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="outline" size="sm">
-                  {range?.from ? (format(range.from, "MMM dd, yyyy") + " - " + format(range.to as Date, "MMM dd, yyyy")) : <span>Pick a date range</span>}
-                  <CalendarIcon className="ml-2 h-4 w-4 opacity-50" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56 p-0" align="end" forceMount>
-                <CalendarDateRangePicker date={range} onDateChange={setRange} />
-              </DropdownMenuContent>
-            </DropdownMenu>
+            <DateRangePicker date={range} onDateChange={setRange} />
           </div>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={pipelineData}>
@@ -165,24 +163,24 @@ export function BookingsMetrics({ className }: BookingsMetricsProps) {
           <h3 className="text-lg font-semibold mb-4">Sales Cycle Stages</h3>
           
           <ResponsiveContainer width="100%" height={300}>
-                    <PieChart width={400} height={300}>
-                      <Pie
-                        data={salesCycleData}
-                        cx={200}
-                        cy={150}
-                        labelLine={false}
-                        outerRadius={100}
-                        fill="#8884d8"
-                        dataKey="value"
-                        label={({ name, percent }) => `${name}: ${(Number(percent) * 100).toFixed(0)}%`}
-                      >
-                        {salesCycleData.map((entry, index) => (
-                          <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
-                        ))}
-                      </Pie>
-                      <Tooltip />
-                    </PieChart>
-                  </ResponsiveContainer>
+            <PieChart width={400} height={300}>
+              <Pie
+                data={salesCycleData}
+                cx={200}
+                cy={150}
+                labelLine={false}
+                outerRadius={100}
+                fill="#8884d8"
+                dataKey="value"
+                label={({ name, percent }) => `${name}: ${(Number(percent) * 100).toFixed(0)}%`}
+              >
+                {salesCycleData.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
+                ))}
+              </Pie>
+              <Tooltip />
+            </PieChart>
+          </ResponsiveContainer>
         </CardContent>
       </Card>
     </div>
