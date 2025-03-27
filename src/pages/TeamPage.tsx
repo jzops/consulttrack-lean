@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { MainNav } from "@/components/layout/MainNav";
 import { TeamMetrics } from "@/components/dashboard/TeamMetrics";
@@ -191,13 +192,9 @@ export default function TeamPage() {
         {/* Book time with Partners */}
         <section>
           <h2 className="text-2xl font-semibold mb-6">Book Time with Partners</h2>
-          <div className="grid gap-6 md:grid-cols-3">
-            {partners.map((partner) => (
-              <PartnerCard key={partner.name} {...partner} />
-            ))}
-          </div>
-
-          <div className="mt-10 p-6 rounded-lg border bg-card/50 backdrop-blur">
+          
+          {/* LeanScale Accelerator Partners Section - MOVED ABOVE PARTNER CARDS */}
+          <div className="mb-6 p-6 rounded-lg border bg-card/50 backdrop-blur">
             <h3 className="text-xl font-semibold mb-3">LeanScale Accelerator Partners</h3>
             <p className="text-muted-foreground mb-4">
               Our partners bring decades of experience across various GTM functions and have 
@@ -210,6 +207,13 @@ export default function TeamPage() {
                 </div>
               ))}
             </div>
+          </div>
+          
+          {/* Partner Cards */}
+          <div className="grid gap-6 md:grid-cols-3">
+            {partners.map((partner) => (
+              <PartnerCard key={partner.name} {...partner} />
+            ))}
           </div>
         </section>
       </div>
