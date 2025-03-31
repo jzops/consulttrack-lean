@@ -1,7 +1,8 @@
 
 import { MainNav } from "@/components/layout/MainNav";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { BookOpen, FileText, Video, Link } from "lucide-react";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { BookOpen, FileText, Video, Link, ExternalLink } from "lucide-react";
 
 export default function Resources() {
   const resourceCategories = [
@@ -30,6 +31,101 @@ export default function Resources() {
         { name: "Partner Resources", link: "#" },
         { name: "Community Forum", link: "#" },
         { name: "Knowledge Base", link: "#" }
+      ]
+    }
+  ];
+  
+  const videoCategories = [
+    {
+      category: "Marketing",
+      videos: [
+        {
+          title: "Marketing Campaign Strategy",
+          thumbnail: "https://via.placeholder.com/320x180",
+          duration: "14:22",
+          views: "1.2K"
+        },
+        {
+          title: "Content Marketing Best Practices",
+          thumbnail: "https://via.placeholder.com/320x180",
+          duration: "8:45",
+          views: "876"
+        },
+        {
+          title: "Lead Generation Techniques",
+          thumbnail: "https://via.placeholder.com/320x180",
+          duration: "11:30",
+          views: "1.5K"
+        }
+      ]
+    },
+    {
+      category: "Sales",
+      videos: [
+        {
+          title: "Outbound Sales Strategy",
+          thumbnail: "https://via.placeholder.com/320x180",
+          duration: "12:18",
+          views: "2.3K"
+        },
+        {
+          title: "Closing Techniques for Enterprise",
+          thumbnail: "https://via.placeholder.com/320x180",
+          duration: "15:42",
+          views: "1.8K"
+        },
+        {
+          title: "Negotiation Skills Masterclass",
+          thumbnail: "https://via.placeholder.com/320x180",
+          duration: "18:05",
+          views: "3.4K"
+        }
+      ]
+    },
+    {
+      category: "Customer Success",
+      videos: [
+        {
+          title: "Customer Onboarding Excellence",
+          thumbnail: "https://via.placeholder.com/320x180",
+          duration: "10:55",
+          views: "945"
+        },
+        {
+          title: "Reducing Churn with Proactive CS",
+          thumbnail: "https://via.placeholder.com/320x180",
+          duration: "13:27",
+          views: "1.1K"
+        },
+        {
+          title: "Customer Health Score Framework",
+          thumbnail: "https://via.placeholder.com/320x180",
+          duration: "9:36",
+          views: "780"
+        }
+      ]
+    },
+    {
+      category: "Partnerships",
+      videos: [
+        {
+          title: "Building Strategic Partnerships",
+          thumbnail: "https://via.placeholder.com/320x180",
+          duration: "16:20",
+          views: "1.7K"
+        },
+        {
+          title: "Partner Enablement Programs",
+          thumbnail: "https://via.placeholder.com/320x180",
+          duration: "11:48",
+          views: "925"
+        },
+        {
+          title: "Co-selling with Partners",
+          thumbnail: "https://via.placeholder.com/320x180",
+          duration: "14:10",
+          views: "1.3K"
+        }
       ]
     }
   ];
@@ -77,6 +173,56 @@ export default function Resources() {
               </CardContent>
             </Card>
           ))}
+        </div>
+        
+        <div className="mt-12">
+          <div className="flex items-center mb-6">
+            <Video className="h-6 w-6 mr-2" />
+            <h2 className="text-2xl font-bold">LeanScale Video Library</h2>
+          </div>
+          
+          <Tabs defaultValue="marketing" className="w-full">
+            <TabsList className="mb-6">
+              <TabsTrigger value="marketing">Marketing</TabsTrigger>
+              <TabsTrigger value="sales">Sales</TabsTrigger>
+              <TabsTrigger value="cs">Customer Success</TabsTrigger>
+              <TabsTrigger value="partnerships">Partnerships</TabsTrigger>
+            </TabsList>
+            
+            {videoCategories.map((category) => (
+              <TabsContent 
+                key={category.category.toLowerCase()} 
+                value={category.category.toLowerCase() === "customer success" ? "cs" : category.category.toLowerCase()}
+              >
+                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                  {category.videos.map((video, index) => (
+                    <div key={index} className="group overflow-hidden rounded-lg border bg-card shadow-sm hover:shadow-md transition-all">
+                      <div className="relative">
+                        <img 
+                          src={video.thumbnail} 
+                          alt={video.title}
+                          className="w-full object-cover aspect-video"
+                        />
+                        <div className="absolute bottom-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
+                          {video.duration}
+                        </div>
+                      </div>
+                      <div className="p-4">
+                        <h3 className="font-medium group-hover:text-primary transition-colors">{video.title}</h3>
+                        <div className="flex items-center justify-between mt-2">
+                          <span className="text-xs text-muted-foreground">{video.views} views</span>
+                          <a href="#" className="text-xs text-primary flex items-center">
+                            Watch
+                            <ExternalLink className="ml-1 h-3 w-3" />
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </TabsContent>
+            ))}
+          </Tabs>
         </div>
       </div>
     </div>
