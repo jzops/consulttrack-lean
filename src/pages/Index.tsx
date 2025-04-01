@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { MetricsCard } from "@/components/dashboard/MetricsCard";
 import { TeamMemberCard } from "@/components/dashboard/TeamMemberCard";
@@ -27,6 +26,16 @@ import {
 } from "@/components/ui/hover-card";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
 
 const teamMembers = [
   {
@@ -112,6 +121,7 @@ export default function Index() {
   
   const [showTeamPopup, setShowTeamPopup] = useState(false);
   const [selectedTeam, setSelectedTeam] = useState('');
+  const [auditModalOpen, setAuditModalOpen] = useState(false);
 
   const handleTeamClick = (team: string) => {
     setSelectedTeam(team);
@@ -126,6 +136,26 @@ export default function Index() {
     setShowTeamPopup(false);
   };
 
+  const handleAuditRequest = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const email = formData.get("email");
+    const urgency = formData.get("urgency");
+    const comments = formData.get("comments");
+    
+    // In a real application, you would send this data to your backend
+    console.log({ email, urgency, comments });
+    
+    // Show success message
+    toast({
+      title: "Audit Request Submitted",
+      description: "We'll be in touch with you shortly.",
+    });
+    
+    // Close the modal
+    setAuditModalOpen(false);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-muted to-background p-8">
       <div className="max-w-7xl mx-auto space-y-8 animate-fade-in">
@@ -138,6 +168,13 @@ export default function Index() {
               className="h-4"
             />
           </div>
+          <Button 
+            variant="default" 
+            className="bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600"
+            onClick={() => setAuditModalOpen(true)}
+          >
+            Request an Audit
+          </Button>
         </div>
         
         {/* Metrics Overview */}
@@ -591,6 +628,63 @@ export default function Index() {
               Add {selectedTeam} Team
             </Button>
           </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Audit Request Modal */}
+      <Dialog open={auditModalOpen} onOpenChange={setAuditModalOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Request a GTM Audit</DialogTitle>
+            <DialogDescription>
+              Tell us about your needs and our team will get back to you with a customized audit plan.
+            </DialogDescription>
+          </DialogHeader>
+          
+          <form onSubmit={handleAuditRequest} className="space-y-4 py-4">
+            <div className="space-y-2">
+              <Label htmlFor="email">Email</Label>
+              <Input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="you@example.com"
+                required
+              />
+            </div>
+            
+            <div className="space-y-2">
+              <Label htmlFor="urgency">Urgency</Label>
+              <Select name="urgency" defaultValue="medium">
+                <SelectTrigger>
+                  <SelectValue placeholder="Select urgency" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="low">Low - Within 2 weeks</SelectItem>
+                  <SelectItem value="medium">Medium - Within 1 week</SelectItem>
+                  <SelectItem value="high">High - Within 2-3 days</SelectItem>
+                  <SelectItem value="urgent">Urgent - ASAP</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            
+            <div className="space-y-2">
+              <Label htmlFor="comments">Comments</Label>
+              <Textarea
+                id="comments"
+                name="comments"
+                placeholder="Tell us about your specific audit needs..."
+                className="min-h-[100px]"
+              />
+            </div>
+            
+            <DialogFooter className="pt-4">
+              <Button type="button" variant="outline" onClick={() => setAuditModalOpen(false)}>
+                Cancel
+              </Button>
+              <Button type="submit">Submit Request</Button>
+            </DialogFooter>
+          </form>
         </DialogContent>
       </Dialog>
     </div>
