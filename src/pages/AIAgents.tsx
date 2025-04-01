@@ -60,7 +60,10 @@ export default function AIAgents() {
     });
     
     // Close dialog by simulating click on close button
-    document.querySelector("[data-close-dialog]")?.click();
+    const closeButton = document.querySelector("[data-close-dialog]") as HTMLButtonElement;
+    if (closeButton && typeof closeButton.click === 'function') {
+      closeButton.click();
+    }
   };
 
   return (
