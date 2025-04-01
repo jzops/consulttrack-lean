@@ -41,19 +41,19 @@ export default function Resources() {
       videos: [
         {
           title: "Marketing Campaign Strategy",
-          thumbnail: "https://via.placeholder.com/320x180",
+          thumbnail: "/lovable-uploads/3db03203-c377-41e1-a0aa-dce49df7c27c.png",
           duration: "14:22",
           views: "1.2K"
         },
         {
           title: "Content Marketing Best Practices",
-          thumbnail: "https://via.placeholder.com/320x180",
+          thumbnail: "/lovable-uploads/debb96d6-08f9-4d02-a740-91b7f6e71e93.png",
           duration: "8:45",
           views: "876"
         },
         {
           title: "Lead Generation Techniques",
-          thumbnail: "https://via.placeholder.com/320x180",
+          thumbnail: "/lovable-uploads/79532bf8-1e6b-4925-be95-5d51e27c470d.png",
           duration: "11:30",
           views: "1.5K"
         }
@@ -64,19 +64,19 @@ export default function Resources() {
       videos: [
         {
           title: "Outbound Sales Strategy",
-          thumbnail: "https://via.placeholder.com/320x180",
+          thumbnail: "/lovable-uploads/668f6cf8-d746-4bc0-8de9-24a39b33fbe4.png",
           duration: "12:18",
           views: "2.3K"
         },
         {
           title: "Closing Techniques for Enterprise",
-          thumbnail: "https://via.placeholder.com/320x180",
+          thumbnail: "/lovable-uploads/ac3649b7-b722-4042-86c6-4855958c197f.png",
           duration: "15:42",
           views: "1.8K"
         },
         {
           title: "Negotiation Skills Masterclass",
-          thumbnail: "https://via.placeholder.com/320x180",
+          thumbnail: "/lovable-uploads/079cde83-3408-4b24-8f28-1d9309adb81a.png",
           duration: "18:05",
           views: "3.4K"
         }
@@ -87,19 +87,19 @@ export default function Resources() {
       videos: [
         {
           title: "Customer Onboarding Excellence",
-          thumbnail: "https://via.placeholder.com/320x180",
+          thumbnail: "/lovable-uploads/3db6ee0b-bf34-4a76-9860-36bfe70aad62.png",
           duration: "10:55",
           views: "945"
         },
         {
           title: "Reducing Churn with Proactive CS",
-          thumbnail: "https://via.placeholder.com/320x180",
+          thumbnail: "/lovable-uploads/668f6cf8-d746-4bc0-8de9-24a39b33fbe4.png",
           duration: "13:27",
           views: "1.1K"
         },
         {
           title: "Customer Health Score Framework",
-          thumbnail: "https://via.placeholder.com/320x180",
+          thumbnail: "/lovable-uploads/ac3649b7-b722-4042-86c6-4855958c197f.png",
           duration: "9:36",
           views: "780"
         }
@@ -110,19 +110,19 @@ export default function Resources() {
       videos: [
         {
           title: "Building Strategic Partnerships",
-          thumbnail: "https://via.placeholder.com/320x180",
+          thumbnail: "/lovable-uploads/079cde83-3408-4b24-8f28-1d9309adb81a.png",
           duration: "16:20",
           views: "1.7K"
         },
         {
           title: "Partner Enablement Programs",
-          thumbnail: "https://via.placeholder.com/320x180",
+          thumbnail: "/lovable-uploads/3db03203-c377-41e1-a0aa-dce49df7c27c.png",
           duration: "11:48",
           views: "925"
         },
         {
           title: "Co-selling with Partners",
-          thumbnail: "https://via.placeholder.com/320x180",
+          thumbnail: "/lovable-uploads/debb96d6-08f9-4d02-a740-91b7f6e71e93.png",
           duration: "14:10",
           views: "1.3K"
         }

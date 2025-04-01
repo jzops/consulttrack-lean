@@ -1,4 +1,3 @@
-
 import { MainNav } from "@/components/layout/MainNav";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -41,14 +40,14 @@ export default function AIAgents() {
     }
   ]);
   
-  const handleAddAgent = (event) => {
+  const handleAddAgent = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const formData = new FormData(event.target);
+    const formData = new FormData(event.currentTarget);
     const newAgent = {
       id: agents.length + 1,
-      name: formData.get("name"),
-      description: formData.get("description"),
-      platform: formData.get("platform"),
+      name: String(formData.get("name") || ""),
+      description: String(formData.get("description") || ""),
+      platform: String(formData.get("platform") || ""),
       interactions: 0,
       lastActive: "Just now",
       icon: MessageSquare
@@ -61,8 +60,7 @@ export default function AIAgents() {
     });
     
     // Close dialog by simulating click on close button
-    document.querySelector("[data-close-dialog]")?.addEventListener("click", () => {});
-    document.querySelector("[data-close-dialog]")?.dispatchEvent(new MouseEvent("click"));
+    document.querySelector("[data-close-dialog]")?.click();
   };
 
   return (
